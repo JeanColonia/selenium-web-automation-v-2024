@@ -14,8 +14,10 @@ public class StaticDropDowns {
     public static void main(String[] args) throws InterruptedException {
 
 
+
         WebDriver driver = new ChromeDriver();
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2000));
         Dropdowns dropdown = new Dropdowns();
 
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
@@ -23,27 +25,47 @@ public class StaticDropDowns {
 
         WebElement departureCityInput = driver.findElement(By.id("ctl00_mainContent_ddl_originStation1_CTXT"));
 
+        WebElement departureCity = driver.findElement(By.xpath("//a[@value='AIP']"));
 
-        WebElement arrivalCity = driver.findElement(By.id("ctl00_mainContent_ddl_destinationStation1_CTXT"));
+        WebElement arrivalCity = driver.findElement(By.xpath("(//a[@value='MAA'])[2]"));
+        //WebElement arrivalCity = driver.findElement(By.id("ctl00_mainContent_ddl_destinationStation1_CTXT"));
 
         WebElement viewDate = driver.findElement(By.id("ctl00_mainContent_view_date1"));
 
+        WebElement passengersContainer = driver.findElement(By.id("divpaxinfo"));
 
-        departureCityInput.click();
-
-        departureCityInput.sendKeys("Adampur");
-
-        arrivalCity.click();
-        arrivalCity.sendKeys("Delhi");
-
-
+        WebElement addPassenger = driver.findElement(By.id("hrefIncAdt"));
 
         Select currencySelect  = dropdown.staticDropdownId(driver,"ctl00_mainContent_DropDownListCurrency");
+
+        departureCityInput.click();
+        departureCity.click();
+        arrivalCity.click();
+
+
+        int totalPassengers= 3;
+
+
+
+
+
 
 
         currencySelect.selectByIndex(2);
 
-        Thread.sleep(1500);
+
+        passengersContainer.click();
+
+
+        int i=1;
+        while(i<=totalPassengers){
+
+            addPassenger.click();
+            i++;
+        }
+
+
+
 
         driver.quit();
 
