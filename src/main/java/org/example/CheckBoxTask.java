@@ -29,6 +29,7 @@ public class CheckBoxTask {
         firstCheckBox.click();
         Assert.assertTrue(firstCheckBox.isSelected());
 
+
         firstCheckBox.click();
         Assert.assertFalse(firstCheckBox.isSelected());
 
