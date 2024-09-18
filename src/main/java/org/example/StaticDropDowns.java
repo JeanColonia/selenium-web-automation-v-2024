@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.utils.Dropdowns;
+import org.example.utils.functions.Dropdowns;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
