@@ -24,7 +24,7 @@ public class formTask {
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
 
 
-        JSONObject personalInfo = jsonHandler.jsonManager("C://Users/jcolonia/Desktop/files/automation/selenium-test/src/main/java/org/example/utils/data/personInfo.json");
+        JSONObject personalInfo = jsonHandler.jsonManager("src/main/java/org/example/utils/data/personInfo.json");
 
 
         String name = (String) personalInfo.get("name");
@@ -33,7 +33,8 @@ public class formTask {
         Boolean loveIceCream = (Boolean) personalInfo.get("loveIceCream");
         String gender = (String) personalInfo.get("gender");
         String employeeStatus = (String) personalInfo.get("employeeStatus");
-        String[] DateOfBirth = ((String) personalInfo.get("DateOfBirth")).split("/");
+        String dateOfBirth = (String) personalInfo.get("DateOfBirth");
+        String[] DateOfBirthDivided = ((String) personalInfo.get("DateOfBirth")).split("/");
 
 
         WebDriver driver = new ChromeDriver();
@@ -49,7 +50,7 @@ public class formTask {
 
         Select genderOptions = new Select(driver.findElement(By.id("exampleFormControlSelect1")));
         WebElement employeeStatusRadioBtn = driver.findElement(By.id("inlineRadio1"));
-        WebElement dateOfBirth = driver.findElement(By.id("exampleFormControlSelect1"));
+        WebElement dateOfBirthInput = driver.findElement(By.name("bday"));
 
         WebElement submitBtn = driver.findElement(By.cssSelector("input[type='submit']"));
         String confirmationMessage = "Success!";
@@ -61,7 +62,7 @@ public class formTask {
         if (loveIceCream) iceCreamCheckbox.click();
         genderOptions.selectByVisibleText(gender);
         employeeStatusRadioBtn.click();
-        dateOfBirth.sendKeys("12/04/2000");
+        dateOfBirthInput.sendKeys("12/04/2000");
 
         submitBtn.click();
 
@@ -70,6 +71,8 @@ public class formTask {
         Thread.sleep(1500);
 
         Assert.assertEquals(successAlert.getText(), confirmationMessage);
+
+        Thread.sleep(2000);
         driver.quit();
 
 
