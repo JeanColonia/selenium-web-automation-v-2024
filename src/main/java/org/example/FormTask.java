@@ -1,7 +1,6 @@
 package org.example;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,14 +10,10 @@ import org.example.utils.functions.jsonHandler;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.time.Duration;
 
 
-public class formTask {
+public class FormTask {
 
 
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
