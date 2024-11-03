@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,10 @@ public class GreenKart {
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
        String[] requestProducts = {"Cucumber", "Brocolli", "Beetroot"};
+       String promoSuccessMsg = "Code applied ..!";
+       Integer promoDiscountValue = 10;
+
+       String successOrderMsg = "Thank you, your order has been placed successfully";
 
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
         List<WebElement> productsToPick = driver.findElements(By.cssSelector("h4.product-name"));
@@ -33,23 +38,52 @@ public class GreenKart {
 
         cartBtn.click();
 
-        List<WebElement> cartProductNames = driver.findElements(By.cssSelector("p.product-name"));
+        List<WebElement> cartProducts = driver.findElements(By.cssSelector("p.product-name"));
 
-        List products = Arrays.asList(requestProducts);
-        for(int i=0; i<products.size();i++){
+        WebElement processToCheckOut = driver.findElement(By.xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]"));
 
-            String product = cartProductNames.get(i).getText();
-        int count=0;
-            if(cartProductNames.contains(products.get(i))){
-                count++;
-            }
+        processToCheckOut.click();
 
-            System.out.println(count +"----" + products.size());
+        WebElement promoCodeInput = driver.findElement(By.className("promoCode"));
+
+        promoCodeInput.sendKeys("rahulshettyacademy");
+
+        WebElement promoBtn = driver.findElement(By.className("promoBtn"));
+
+        promoBtn.click();
+
+        WebElement promoInfo = driver.findElement(By.className("promoInfo"));
+
+        promoInfo.getText().contains(promoSuccessMsg);
+
+        String[] discountPercentage = driver.findElement(By.className("discountPerc")).getText().split("%");
+
+        Integer discountPercentageValue =  Integer.parseInt(discountPercentage[0]);
+
+
+        if(discountPercentageValue == 10){
+            WebElement orderBtn = driver.findElement(By.xpath("//button[contains(text(), 'Place Order')]"));
+
+            orderBtn.click();
+        }
+        else {
+            System.out.println("DISCOUNT VALUE APPLIED ERROR");
         }
 
+        Select countrySelect = new Select(driver.findElement(By.xpath("//option[text()='Select']/parent::select")));
+
+        countrySelect.selectByValue("Peru");
+
+        WebElement termsCheck = driver.findElement(By.className("chkAgree"));
+
+        termsCheck.click();
+
+        WebElement proceedBtn = driver.findElement(By.xpath("//button[text()='Proceed']"));
+
+        proceedBtn.click();
 
 
-     Thread.sleep(3000);
+        Thread.sleep(3000);
         driver.quit();
 
 
@@ -86,6 +120,12 @@ public class GreenKart {
         }
 
         return products;
+    }
+
+
+    public static List unformattedProductName(List<WebElement> productsToPick){
+
+        return null;
     }
 
 
