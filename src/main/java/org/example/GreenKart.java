@@ -115,7 +115,8 @@ public class GreenKart {
     public static List formatProductName (List<WebElement> productsToPick){
         List products = new ArrayList();
         for(int i=0; i<productsToPick.size();i++){
-            String[] unformatedProduct = productsToPick.get(i).getText().split("-");         String productName  = unformatedProduct[0].trim();
+            String[] unformatedProduct = productsToPick.get(i).getText().split("-");
+            String productName  = unformatedProduct[0].trim();
             products.add(productName);
         }
 
