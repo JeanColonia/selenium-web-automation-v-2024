@@ -70,6 +70,8 @@ public class CheckFlights {
         Thread.sleep(2000);
         searchFlights.click();
 
+
+
         driver.quit();
 
 
