@@ -25,6 +25,10 @@ public class LimitedLinkCount {
 
         System.out.println(footerContainer.findElements(By.tagName("a")).size());
 
+        WebElement discountCouponsFooter = driver.findElement(By.xpath("//table[@class='gf-t']/tbody/tr/child::td[1]"));
+
+        System.out.println(discountCouponsFooter.findElements(By.className("gf-li")).size());
+
         driver.quit();
     }
 }
