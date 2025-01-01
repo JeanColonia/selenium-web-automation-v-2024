@@ -1,8 +1,10 @@
 package org.example;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -48,5 +50,25 @@ public class Codes {
         String valor = firstResult.orElse("Valor no encontrado....");
         System.out.println(count_);
         System.out.println(valor);
+    }
+
+
+    @Test
+    public void streamMap(){
+
+        List<String> names = new ArrayList<>();
+        names.add("Jose");
+        names.add("Adam");
+        names.add("Margareth");
+        names.add("Louis");
+        names.add("Andrade");
+
+       Stream<String> names1 =  names.stream().filter(s-> s.startsWith("A")).map(s->s.toUpperCase());
+
+       Stream<String> newStream = Stream.concat(names.stream(), names1);
+
+       boolean flag = newStream.anyMatch(s->s.equalsIgnoreCase("adam"));
+
+        Assert.assertTrue(flag);
     }
 }
