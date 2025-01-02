@@ -3,9 +3,12 @@ package org.example;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Codes {
@@ -70,5 +73,12 @@ public class Codes {
        boolean flag = newStream.anyMatch(s->s.equalsIgnoreCase("adam"));
 
         Assert.assertTrue(flag);
+
+
+        List<Integer> numbers = Arrays.asList(16,4,2,1,6,7,9,4,2,1);
+
+        List<Integer> results = numbers.stream().sorted().distinct().collect(Collectors.toList());
+
+        System.out.println(results.get(2));
     }
 }
