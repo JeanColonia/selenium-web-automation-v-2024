@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class Tables {
 
-    public static void main(String[]args){
+    public static void main(String[]args) throws InterruptedException {
 
 
         WebDriver driver = new ChromeDriver();
@@ -42,15 +42,23 @@ public class Tables {
         List<String> itemValues = tableResults.stream().map(s-> s.getText()).collect(Collectors.toList());
 
 
-
-
-
-
        List<String>  sortedList = tableResults.stream().map(s-> s.getText()).sorted().collect(Collectors.toList());
 
         Assert.assertTrue(itemValues.equals(sortedList));
 
+        List<String> price = tableResults.stream().filter(s->s.getText().contains("Apple")).map(s-> getVeggiePrice(s)).collect(Collectors.toList());
+
+
+        System.out.println(price);
+
+        Thread.sleep(2000);
         driver.quit();
 
+    }
+
+    private static String getVeggiePrice(WebElement s) {
+
+        String price = s.findElement(By.xpath("following-sibling::td[1]")).getText();
+        return price;
     }
 }
