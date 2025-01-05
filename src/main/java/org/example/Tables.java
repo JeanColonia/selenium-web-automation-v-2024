@@ -8,7 +8,6 @@ import org.testng.Assert;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Tables {
 
