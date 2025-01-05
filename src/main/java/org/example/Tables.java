@@ -46,8 +46,22 @@ public class Tables {
 
         Assert.assertTrue(itemValues.equals(sortedList));
 
-        List<String> price = tableResults.stream().filter(s->s.getText().contains("Apple")).map(s-> getVeggiePrice(s)).collect(Collectors.toList());
 
+        List<String> price;
+
+        WebElement nextResults = driver.findElement(By.cssSelector("a[aria-label='Next']"));
+
+
+        do{
+
+            List<WebElement> rows = driver.findElements(By.xpath("//tr/td[1]"));
+
+            price = rows.stream().filter(s->s.getText().contains("Rice")).map(s-> getVeggiePrice(s)).collect(Collectors.toList());
+
+            if(price.size()<1){
+                nextResults.click();
+            }
+        }while (price.size()<1);
 
         System.out.println(price);
 
