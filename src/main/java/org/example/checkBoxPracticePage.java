@@ -59,7 +59,7 @@ public class checkBoxPracticePage {
         Random random = new Random();
         int number = random.nextInt(size);
 
-        return number;
+        return (Integer) number;
 
     }
 
